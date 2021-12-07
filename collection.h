@@ -5,7 +5,6 @@ private:
     struct node
     {
         T info;
-        node *prev;
         node *next;
     };
     node *first;

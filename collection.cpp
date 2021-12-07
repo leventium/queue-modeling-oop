@@ -1,0 +1,101 @@
+#include "collection.h"
+
+template <typename T>
+UnitsCollection<T>::UnitsCollection()
+{
+    first = nullptr;
+}
+template <typename T>
+UnitsCollection<T>::~UnitsCollection()
+{
+    node *now = first, *sled;
+    while (now != nullptr)
+    {
+        sled = now->next;
+        delete now;
+        now = sled;
+    }
+}
+template <typename T>
+int UnitsCollection<T>::size()
+{
+    node *now = first;
+    int i = 0;
+    while (now != nullptr)
+    {
+        ++i;
+        now = now->next;
+    }
+    return i;
+}
+template <typename T>
+const T& UnitsCollection<T>::operator[](const int &i)
+{
+    node *now = first;
+    if (now != nullptr)
+    {
+        int ind = 0;
+        while (ind < i)
+        {
+            now = now->next;
+            ++ind;
+        }
+        if (now != nullptr)
+            return now->info;
+        else
+            throw std::exeption("index out of range");
+    }
+    else
+        throw std::exeption("index out of range");
+    
+}
+template <typename T>
+void UnitsCollection<T>::operator<<(const T &right)
+{
+    if (first != nullptr)
+    {
+        node *now = first;
+        while (now->next != nullptr) now = now->next;
+        node *elem = new node;
+        elem->info = right;
+        elem->next = nullptr;
+        now->next = elem;
+    }
+    else
+    {
+        first = new node;
+        first->info = right;
+        first->next = nullptr;
+    }
+}
+template <typename T>
+void UnitsCollection<T>::insert(const int &i, const T &right)
+{
+    if (first != nullptr)
+    {
+        node *now = first;
+        int ind = 0;
+        while (ind < i - 1)
+        {
+            now = now->next;
+            ++ind;
+        }
+        if (now != nullptr)
+        {
+            node *elem = new node;
+            elem->info = right;
+            elem->next = nullptr;
+            now->next = elem;
+        }
+        else
+            throw std::exeption("index out of range");
+    }
+    else if (i == 0)
+    {
+        first = new node;
+        first->info = right;
+        first->next = nullptr;
+    }
+    else
+        throw std::exeption("index out of range");
+}
