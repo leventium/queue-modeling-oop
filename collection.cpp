@@ -43,10 +43,10 @@ const T& UnitsCollection<T>::operator[](const int &i)
         if (now != nullptr)
             return now->info;
         else
-            throw std::exeption("index out of range");
+            throw "index out of range";
     }
     else
-        throw std::exeption("index out of range");
+        throw "index out of range";
     
 }
 template <typename T>
@@ -88,7 +88,7 @@ void UnitsCollection<T>::insert(const int &i, const T &right)
             now->next = elem;
         }
         else
-            throw std::exeption("index out of range");
+            throw "index out of range";
     }
     else if (i == 0)
     {
@@ -97,5 +97,5 @@ void UnitsCollection<T>::insert(const int &i, const T &right)
         first->next = nullptr;
     }
     else
-        throw std::exeption("index out of range");
+        throw "index out of range";
 }
