@@ -1,5 +1,5 @@
-#ifndef CONTROLL
-#define CONTROLL
+#ifndef CONTROL
+#define CONTROL
 
 #include <iostream>
 #include <stdio.h>
@@ -31,4 +31,4 @@ public:
     void enter(int &kass, UnitsCollection<QueueUnit> &queue, UnitsCollection<StatUnit> &stat, int &n);
 };
 
-#endif CONTROLL
+#endif CONTROL
