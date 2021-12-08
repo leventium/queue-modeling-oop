@@ -17,7 +17,7 @@ UnitsCollection<T>::~UnitsCollection()
     }
 }
 template <typename T>
-int UnitsCollection<T>::size()
+int UnitsCollection<T>::size() const
 {
     node *now = first;
     int i = 0;
@@ -29,7 +29,8 @@ int UnitsCollection<T>::size()
     return i;
 }
 template <typename T>
-const T& UnitsCollection<T>::operator[](const int &i)           // &i - index
+const T& UnitsCollection<T>::operator[](const int &i) const
+// &i - index
 {
     node *now = first;
     if (now != nullptr)
@@ -50,7 +51,8 @@ const T& UnitsCollection<T>::operator[](const int &i)           // &i - index
     
 }
 template <typename T>
-void UnitsCollection<T>::operator<<(const T &right)             // &right - new element   
+void UnitsCollection<T>::operator<<(const T &right)
+// &right - new element   
 {
     if (first != nullptr)
     {
@@ -69,7 +71,8 @@ void UnitsCollection<T>::operator<<(const T &right)             // &right - new 
     }
 }
 template <typename T>
-void UnitsCollection<T>::insert(const int &i, const T &right)   // &i - index, &right - new element
+void UnitsCollection<T>::insert(const int &i, const T &right)
+// &i - index, &right - new element
 {
     if (first != nullptr)
     {
@@ -95,6 +98,32 @@ void UnitsCollection<T>::insert(const int &i, const T &right)   // &i - index, &
         first = new node;
         first->info = right;
         first->next = nullptr;
+    }
+    else
+        throw "index out of range";
+}
+template <typename T>
+void UnitsCollection<T>::del(const int &i)
+// &i - index
+{
+    if (first != nullptr)
+    {
+        node *now = first;
+        int ind = 0;
+        while (ind < i - 1)
+        {
+            now = now->next;
+            ++ind;
+        }
+        if (now != nullptr && now->next != nullptr)
+        {
+            node *sled;
+            sled = now->next->next;
+            delete now->next;
+            now->next = sled;
+        }
+        else
+            throw "index out of range";
     }
     else
         throw "index out of range";
