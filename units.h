@@ -1,3 +1,6 @@
+#ifndef UNITS
+#define UNITS
+
 class OfferUnit
 {
 private:
@@ -30,3 +33,5 @@ public:
     virtual void setUnique(int status);
     virtual int getUnique() const;
 };
+
+#endif UNITS

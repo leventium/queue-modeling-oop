@@ -1,15 +1,20 @@
 #include <iostream>
 #include "units.h"
+#include "collection.h"
+//#include "collection.cpp"
 
 int main()
 {
-    QueueUnit test;
-    test.setNumber(1);
-    test.setType(2);
-    test.setUnique(30);
-    std::cout << test.getNumber() << std::endl << test.getType() << std::endl << test.getUnique() << "\n\n";
-    
-    StatUnit tt(test, 1);
-    std::cout << tt.getNumber() << "\n" << tt.getType() << "\n" << tt.getUnique() << "\n\n\n";
+    /*
+    UnitsCollection<int> some;
+    some.insert(0, 10);
+    std::cout << some[0] << "\n\n";
+    */
+
+    QueueUnit a;
+    a.setNumber(10);
+    std::cout << a.getNumber() << "\n\n";
+
+    UnitsCollection<int> aa;
     return 0;
 }
