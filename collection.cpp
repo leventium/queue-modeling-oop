@@ -29,7 +29,7 @@ int UnitsCollection<T>::size()
     return i;
 }
 template <typename T>
-const T& UnitsCollection<T>::operator[](const int &i)
+const T& UnitsCollection<T>::operator[](const int &i)           // &i - index
 {
     node *now = first;
     if (now != nullptr)
@@ -50,7 +50,7 @@ const T& UnitsCollection<T>::operator[](const int &i)
     
 }
 template <typename T>
-void UnitsCollection<T>::operator<<(const T &right)
+void UnitsCollection<T>::operator<<(const T &right)             // &right - new element   
 {
     if (first != nullptr)
     {
@@ -69,7 +69,7 @@ void UnitsCollection<T>::operator<<(const T &right)
     }
 }
 template <typename T>
-void UnitsCollection<T>::insert(const int &i, const T &right)
+void UnitsCollection<T>::insert(const int &i, const T &right)   // &i - index, &right - new element
 {
     if (first != nullptr)
     {

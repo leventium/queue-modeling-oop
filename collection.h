@@ -9,11 +9,11 @@ private:
     };
     node *first;
 public:
-    UnitsCollection();
-    ~UnitsCollection();
-    int size();
-    const T& operator[](const int &i);
-    void operator<<(const T &right);
-    void insert(const int &i, const T &right);
-    void del(const int &i);
+    UnitsCollection();                          //конструктор
+    ~UnitsCollection();                         //деструктор
+    int size();                                 //возвращает размер массива
+    const T& operator[](const int &i);          //возвращает ссылку на запрошенный элемент
+    void operator<<(const T &right);            //добавляет переданный элемент в конец
+    void insert(const int &i, const T &right);  //всталяет новый элемент на указанное место
+    void del(const int &i);                     //удаляет указанный элемент
 };
