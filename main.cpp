@@ -1,20 +1,16 @@
 #include <iostream>
 #include "units.h"
-#include "collection.h"
-//#include "collection.cpp"
+//#include "collection.h"
+#include "kasses.h"
 
 int main()
 {
-    /*
-    UnitsCollection<int> some;
-    some.insert(0, 10);
-    std::cout << some[0] << "\n\n";
-    */
-
-    QueueUnit a;
-    a.setNumber(10);
-    std::cout << a.getNumber() << "\n\n";
-
-    UnitsCollection<int> aa;
+    Kasses kass;
+    QueueUnit test;
+    test.setNumber(10);
+    kass.setAmount(10);
+    kass[0] = test;
+    
+    std::cout << kass[2].getNumber() << "\n\n";
     return 0;
 }
