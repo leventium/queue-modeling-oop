@@ -1,10 +1,20 @@
 #include "kasses.h"
 
+Kasses::Kasses()
+{
+    amount = 0;
+}
 int Kasses::getAmount() const { return amount; }
-void Kasses::setAmount(int amount) { this->amount = amount; }
+void Kasses::setAmount(int amount)
+{
+    if (amount >= 1 && amount <= 5)
+        this->amount = amount;
+    else
+        throw "invalid argument";
+}
 QueueUnit& Kasses::operator[](const int &i)
 {
-    if (!amount && i >= 0 && i <= amount)
+    if (amount && i >= 0 && i <= amount - 1)
     {
         switch (i)
         {
@@ -27,4 +37,6 @@ QueueUnit& Kasses::operator[](const int &i)
                 throw "index out of range";
         }
     }
+    else
+        throw "index out of range";
 }
