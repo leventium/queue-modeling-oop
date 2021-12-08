@@ -1,3 +1,6 @@
+#ifndef COLLECTION
+#define COLLECTION
+
 template <typename T>
 class UnitsCollection
 {
@@ -17,3 +20,5 @@ public:
     void insert(const int &i, const T &right);  //всталяет новый элемент на указанное место
     void del(const int &i);                     //удаляет указанный элемент
 };
+
+#endif COLLECTION
