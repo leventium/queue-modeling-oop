@@ -1,7 +1,8 @@
 #include <iostream>
 #include "units.h"
-#include "collection.h"
-//#include "collection.cpp"
+//#include "collection.h"
+#include "control.h"
+#include "collection.cpp"
 
 int main()
 {
