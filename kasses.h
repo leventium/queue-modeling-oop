@@ -6,7 +6,7 @@
 class Kasses
 {
 private:
-    int amount;
+    int amount = 0;
     QueueUnit kas0, kas1, kas2, kas3, kas4;
 public:
     int getAmount() const;
