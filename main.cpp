@@ -11,5 +11,6 @@ int main()
     int n = 0;
     Control control;
     control.enter(kass, queue, stat, n);
+    queue.printAll();
     return 0;
 }

@@ -25,7 +25,7 @@ private:
 public:
     void printQueue();
     void printStat();
-    int queueCount();
+    int queueCount(Kasses& kass, UnitsCollection<QueueUnit>& queue);
     void makeStat();
 
     int read(void);
@@ -106,7 +106,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 				n++;
 				queueOne.setNumber(n);
 				queueOne.setType((int)C[i]);
-				queueOne.setUnique(times[(int)C[i]]);
+				queueOne.setUnique(times[(int)C[i]-65]);
 				queue << queueOne;
 				queue1.delAll();
 				for (w = 0; w < queue.size(); w++)
@@ -170,3 +170,8 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 	} while (c == 0); //the case when the user did not enter anything or entered the wrong characters
 	
 }
+
+/*int Control::queueCount(Kasses& kass, UnitsCollection<QueueUnit>& queue)
+{
+
+}*/
