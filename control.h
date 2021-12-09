@@ -96,7 +96,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 			{ //запись в статистику
 				n++;
 				statOne.setNumber(n);
-				statOne.setType((int)C[i]);
+				statOne.setType((int)C[i]-65);
 				statOne.setUnique(0);
 				stat << statOne;
 			}
@@ -104,10 +104,10 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 			{
 				n++;
 				queueOne.setNumber(n);
-				queueOne.setType((int)C[i]);
-				queueOne.setUnique(times[(int)C[i]]);
+				queueOne.setType((int)C[i]-65);
+				queueOne.setUnique(times[(int)C[i]-65]);
 				queue1.delAll();
-				for (w = 0; w <= queue.size(); w++)
+				for (w = 0; w < queue.size(); w++)
 				{
 					queue1 << queue[w];
 				}
@@ -119,7 +119,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 					//запись в статистику
 					queue.del(queue.size());
 					statOne.setNumber(n);
-					statOne.setType((int)C[i]);
+					statOne.setType((int)C[i]-65);
 					statOne.setUnique(0);
 					stat << statOne;
 				}
@@ -160,9 +160,11 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 	} while ((a > 5));
 	kass.setAmount(a);
 
-	/*do
+	int c;
+	do
 	{
 		check(queue, stat, n, kass);
-	} while (queue.size() == 0); //the case when the user did not enter anything or entered the wrong characters*/
+	    c = queue.size();
+	} while (c == 0); //the case when the user did not enter anything or entered the wrong characters
 	
 }
