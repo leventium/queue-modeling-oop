@@ -3,7 +3,6 @@
 #include "units.h"
 #include "collection.h"
 #include <string.h>
-#define _CRT_SECURE_NO_WARNINGS
 
 /*
 K[0] - время до конца обслуживания
