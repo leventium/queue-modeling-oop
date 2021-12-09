@@ -128,3 +128,16 @@ void UnitsCollection<T>::del(const int &i)
     else
         throw "index out of range";
 }
+
+template <typename T>
+void UnitsCollection<T>::delAll()
+{
+    node* now = first, * sled;
+    while (now != nullptr)
+    {
+        sled = now->next;
+        delete now;
+        now = sled;
+    }
+    first = nullptr;
+};

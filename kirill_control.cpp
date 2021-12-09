@@ -60,18 +60,18 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 			if (queue.size >= 30) //условие переполнения очереди по количеству заявок
 			{ //запись в статистику
 				n++;
-				
-				stat[0][*nstat] = (int)C[i];
-				stat[1][*nstat] = *n;
-				stat[2][*nstat] = 0;
-				(*nstat)++;
+				statOne.setNumber(n);
+				statOne.setType((int)C[i]);
+				statOne.setUnique(0);
+				stat << statOne;
 			}
 			else //запись в очередь
 			{
-				(*n)++;
-				queue[0][*nqueue] = (int)C[i];
-				queue[1][*nqueue] = *n;
-				for (w = 0; w <= *nqueue; w++)
+				n++;
+				queueOne.setNumber(n);
+				queueOne.setType((int)C[i]);
+				queueOne.setUnique(times[(int)C[i]]);
+				for (w = 0; w <= queue.size; w++)
 				{
 					queue1[0][w] = queue[0][w];
 					queue1[1][w] = queue[1][w];

@@ -19,6 +19,7 @@ public:
     void operator<<(const T &right);            //добавляет переданный элемент в конец
     void insert(const int &i, const T &right);  //всталяет новый элемент на указанное место
     void del(const int &i);                     //удаляет указанный элемент
+    void delAll();                              //удаляет все элементы
 };
 
 #endif COLLECTION
