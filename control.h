@@ -20,7 +20,6 @@ private:
     int workTime, nowTime, nType, times[5];
 	// workTime - время рабочего дня (вводится один раз)
 	// nowTime - текущее время (меняется каждую секунду)
-    // dayTime - подлежит удалению
     // nType - заданное количество типов
     // times[] - заданное время обработки каждого типа
 public:
@@ -116,7 +115,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 				//timeoch = QueueCount(kass, time, nqueue1, queue1);
 				//cout << timeoch << endl;
 				timeoch = 1;
-				if (timeoch > dayTime) //условие переполнения очереди по времени обработки заявок
+				if (timeoch > nowTime) //условие переполнения очереди по времени обработки заявок
 				{
 					//запись в статистику
 					queue.del(queue.size());
@@ -152,8 +151,8 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 	do
 	{
 		cout << "Enter the length of the working day in seconds (in seconds from 30 to 300)";
-		dayTime = read();
-	} while ((dayTime < 30) || (dayTime > 300));
+		nowTime = read();
+	} while ((nowTime < 30) || (nowTime > 300));
 
 	do
 	{
