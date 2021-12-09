@@ -114,13 +114,13 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 				{
 					queue1 << queue[w];
 				}
-				//timeoch = QueueCount(kass, time, nqueue1, queue1);
+				timeoch = queueCount(kass.getAmount(), queue1);
 				//cout << timeoch << endl;
-				timeoch = 1;
+				//timeoch = 1;
 				if (timeoch > nowTime) //������� ������������ ������� �� ������� ��������� ������
 				{
 					//������ � ����������
-					queue.del(queue.size());
+					queue.del(queue.size()-1);
 					statOne.setNumber(n);
 					statOne.setType((int)C[i]);
 					statOne.setUnique(0);
@@ -383,10 +383,10 @@ void printStat(UnitsCollection<StatUnit>& stat) {
 	for (int i = 0; i < stat.size(); i++) {
 		cout << (char)stat[i].getNumber() << "[" << stat[i].getType() << "] - ";
 		if (stat[i].getUnique()) {
-			cout << "��������;";
+			cout << "approved;";
 		}
 		else {
-			cout << "��������;";
+			cout << "denied;";
 		}
 		cout << endl;
 	}
