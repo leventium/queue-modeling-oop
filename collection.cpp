@@ -141,7 +141,7 @@ void UnitsCollection<T>::del(const int &i)
 template <typename T>
 void UnitsCollection<T>::delAll()
 {
-    if (first)
+    if (first!=nullptr)
     {
         node* now = first, * sled;
         while (now != nullptr)
