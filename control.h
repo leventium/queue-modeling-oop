@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include <stdio.h>
-//#include <conio.h>
+#include <conio.h>
 //#include <Windows.h>
 #include <string.h>
 #include <stdlib.h>
 #include "collection.h"
 #include "units.h"
+#include "kasses.h"
 using namespace std;
 
 #define CLR while (getchar()!='\n')
@@ -27,8 +28,8 @@ public:
     void makeStat();
 
     int read(void);
-    void check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int &n, int &kass);
-    void enter(int &kass, UnitsCollection<QueueUnit> &queue, UnitsCollection<StatUnit> &stat, int &n);
+    void check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int &n, Kasses &kass);
+    void enter(Kasses &kass, UnitsCollection<QueueUnit> &queue, UnitsCollection<StatUnit> &stat, int &n);
 };
 
 #endif CONTROL

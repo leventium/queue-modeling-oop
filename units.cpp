@@ -36,6 +36,13 @@ void QueueUnit::setUnique(int time)
 }
 
 
+StatUnit::StatUnit()
+{
+    this->setNumber(0);
+    this->setType(0);
+    this->setUnique(0);
+}
+
 StatUnit::StatUnit(const QueueUnit &right, int flag)
 {
     this->setNumber(right.getNumber());

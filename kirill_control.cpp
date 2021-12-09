@@ -31,15 +31,74 @@ int Control::read(void)
 	return n;
 }
 
-void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int& n, int& kass)
+void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int& n, Kasses& kass)
 {
+	char C[70];
+	UnitsCollection<QueueUnit> queue1;
+	QueueUnit queueOne;
+	StatUnit statOne;
+	int ch, i, j, q, nc, timeoch, w;
+	//timeoch - время обработки текущей очереди, nc - количество элементов в массиве C, queue1 - копия матрицы очереди
+	cout << "Введите очередь в формате: ABDABC" << endl;
+	j = n;
+	i = 0;
+	ch = _getche();
+	while ((j < 70) && (ch != 13))
+	{
+		C[i] = (char)ch;
+		ch = _getche();
+		i++;
+		j++;
+	}
+	nc = i - 1;
+	cout << endl;
 
+	for (i = 0; i <= nc; i++)
+	{
+		if ((65 <= (int)C[i]) && ((int)C[i] <= (69 - (5 - nType))))  //проверка вводимого символа
+		{
+			if (queue.size >= 30) //условие переполнения очереди по количеству заявок
+			{ //запись в статистику
+				n++;
+				
+				stat[0][*nstat] = (int)C[i];
+				stat[1][*nstat] = *n;
+				stat[2][*nstat] = 0;
+				(*nstat)++;
+			}
+			else //запись в очередь
+			{
+				(*n)++;
+				queue[0][*nqueue] = (int)C[i];
+				queue[1][*nqueue] = *n;
+				for (w = 0; w <= *nqueue; w++)
+				{
+					queue1[0][w] = queue[0][w];
+					queue1[1][w] = queue[1][w];
+				}
+				(*nqueue)++;
+				nqueue1 = *nqueue;
+				timeoch = QueueCount(kass, time, nqueue1, queue1);
+				//cout << timeoch << endl;
+				if (timeoch > timework) //условие переполнения очереди по времени обработки заявок
+				{
+					//запись в статистику
+					(*nqueue)--;
+					stat[0][*nstat] = (int)C[i];
+					stat[1][*nstat] = *n;
+					stat[2][*nstat] = 0;
+					(*nstat)++;
+				}
+
+			}
+		}
+	}
 }
 
 
-void Control::enter(int& kass, UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int& n)
+void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int& n)
 {
-	int i;
+	int i, a;
 	{
 		cout << "Enter the number of application types (maximum 5)";
 		nType = read();
@@ -63,8 +122,9 @@ void Control::enter(int& kass, UnitsCollection<QueueUnit>& queue, UnitsCollectio
 	do
 	{
 		cout << "Enter the number of cash registers (maximum 5)";
-		kass = read();
-	} while ((kass > 5));
+		a = read();
+	} while ((a > 5));
+	kass.setAmount(a);
 
 	do
 	{

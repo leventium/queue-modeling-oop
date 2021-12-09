@@ -29,6 +29,7 @@ class StatUnit : public OfferUnit
 private:
     int status;
 public:
+    StatUnit();
     StatUnit(const QueueUnit &right, int flag);
     virtual void setUnique(int status);
     virtual int getUnique() const;
