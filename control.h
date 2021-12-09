@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <stdio.h>
-//#include <conio.h>
+#include <conio.h>
 //#include <Windows.h>
 #include <string.h>
 #include <stdlib.h>
@@ -75,7 +75,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 	StatUnit statOne;
 	int ch, i, j, q, nc, timeoch, w;
 	//timeoch - время обработки текущей очереди, nc - количество элементов в массиве C, queue1 - копия матрицы очереди
-	cout << "Введите очередь в формате: ABDABC" << endl;
+	cout << "Enter the queue in the format: ABDABC" << endl;
 	j = n;
 	i = 0;
 	ch = _getche();
@@ -97,7 +97,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 			{ //запись в статистику
 				n++;
 				statOne.setNumber(n);
-				statOne.setType((int)C[i]-65);
+				statOne.setType((int)C[i]);
 				statOne.setUnique(0);
 				stat << statOne;
 			}
@@ -105,8 +105,9 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 			{
 				n++;
 				queueOne.setNumber(n);
-				queueOne.setType((int)C[i]-65);
-				queueOne.setUnique(times[(int)C[i]-65]);
+				queueOne.setType((int)C[i]);
+				queueOne.setUnique(times[(int)C[i]]);
+				queue << queueOne;
 				queue1.delAll();
 				for (w = 0; w < queue.size(); w++)
 				{
@@ -120,7 +121,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 					//запись в статистику
 					queue.del(queue.size());
 					statOne.setNumber(n);
-					statOne.setType((int)C[i]-65);
+					statOne.setType((int)C[i]);
 					statOne.setUnique(0);
 					stat << statOne;
 				}
