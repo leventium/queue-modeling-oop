@@ -378,3 +378,16 @@ int Control::queueCount(const int &kass, UnitsCollection<QueueUnit> &queue)
 	count += min;
 	return count;
 }
+
+void printStat(UnitsCollection<StatUnit>& stat) {
+	for (int i = 0; i < stat.size(); i++) {
+		cout << (char)stat[i].getNumber() << "[" << stat[i].getType() << "] - ";
+		if (stat[i].getUnique()) {
+			cout << "��������;";
+		}
+		else {
+			cout << "��������;";
+		}
+		cout << endl;
+	}
+}
