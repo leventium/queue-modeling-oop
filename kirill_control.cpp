@@ -1,4 +1,5 @@
-/*#include "control.h"
+/*
+#include "control.h"
 
 int Control::read(void)
 {
@@ -38,8 +39,8 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 	QueueUnit queueOne;
 	StatUnit statOne;
 	int ch, i, j, q, nc, timeoch, w;
-	//timeoch - время обработки текущей очереди, nc - количество элементов в массиве C, queue1 - копия матрицы очереди
-	cout << "Введите очередь в формате: ABDABC" << endl;
+	//timeoch - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, nc - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ C, queue1 - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ABDABC" << endl;
 	j = n;
 	i = 0;
 	ch = _getche();
@@ -55,17 +56,17 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 
 	for (i = 0; i <= nc; i++)
 	{
-		if ((65 <= (int)C[i]) && ((int)C[i] <= (69 - (5 - nType))))  //проверка вводимого символа
+		if ((65 <= (int)C[i]) && ((int)C[i] <= (69 - (5 - nType))))  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			if (queue.size() >= 30) //условие переполнения очереди по количеству заявок
-			{ //запись в статистику
+			if (queue.size() >= 30) //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+			{ //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				n++;
 				statOne.setNumber(n);
 				statOne.setType((int)C[i]);
 				statOne.setUnique(0);
 				stat << statOne;
 			}
-			else //запись в очередь
+			else //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			{
 				n++;
 				queueOne.setNumber(n);
@@ -79,9 +80,9 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 				//timeoch = QueueCount(kass, time, nqueue1, queue1);
 				//cout << timeoch << endl;
 				timeoch = 1;
-				if (timeoch > dayTime) //условие переполнения очереди по времени обработки заявок
+				if (timeoch > dayTime) //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				{
-					//запись в статистику
+					//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					queue.del(queue.size());
 					statOne.setNumber(n);
 					statOne.setType((int)C[i]);
@@ -125,9 +126,10 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 	} while ((a > 5));
 	kass.setAmount(a);
 
-	/*do
+	do
 	{
 		check(queue, stat, nstat, nqueue, n, *timework, *kass, time, *ntype);
-	} while (queue.size() == 0);*/ //the case when the user did not enter anything or entered the wrong characters
+	} while (queue.size() == 0); //the case when the user did not enter anything or entered the wrong characters
 
-//}
+}
+*/
