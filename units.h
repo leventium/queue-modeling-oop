@@ -22,6 +22,7 @@ private:
 public:
     virtual void setUnique(int time);
     virtual int getUnique() const;
+    void print() const;
 };
 
 class StatUnit : public OfferUnit

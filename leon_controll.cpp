@@ -15,7 +15,7 @@ queue[1] - номер заявки
 queue[2] - время в очереди
 */
 
-void Control::printQueue(const Kasses &kassa) const
+void Control::printQueue(const Kasses &kassa, const UnitsCollection<QueueUnit> &queue) const
 {
 	int i, n;
 	char table[20][80];
@@ -57,45 +57,45 @@ void Control::printQueue(const Kasses &kassa) const
 	}
 	table[1][5] = ']';
 	// [ttt][][][][]
-	for (i = 0; i < 45 && i / 10 < kass; i += 10) {
-		if (K[1][i / 10] == 0) continue;
+	for (i = 0; i < 45 && i / 10 < kassa.getAmount(); i += 10) {
+		if (kassa[i / 10].getType() == 0) continue;
 		table[2][6 + i] = '[';
-		if (timers[i / 10] > 99) {
-			table[2][7 + i] = (char)((int)(timers[i / 10] / 100) + 48);
-			table[2][8 + i] = (char)((int)((timers[i / 10] % 100) / 10) + 48);
-			table[2][9 + i] = (char)(timers[i / 10] % 10 + 48);
+		if (kassa[i / 10].getUnique() > 99) {
+			table[2][7 + i] = (char)((int)(kassa[i / 10].getUnique() / 100) + 48);
+			table[2][8 + i] = (char)((int)((kassa[i / 10].getUnique() % 100) / 10) + 48);
+			table[2][9 + i] = (char)(kassa[i / 10].getUnique() % 10 + 48);
 		}
-		else if (timers[i / 10] > 9) {
+		else if (kassa[i / 10].getUnique() > 9) {
 			table[2][7 + i] = '0';
-			table[2][8 + i] = (char)((int)(timers[i / 10] / 10) + 48);
-			table[2][9 + i] = (char)(timers[i / 10] % 10 + 48);
+			table[2][8 + i] = (char)((int)(kassa[i / 10].getUnique() / 10) + 48);
+			table[2][9 + i] = (char)(kassa[i / 10].getUnique() % 10 + 48);
 		}
 		else {
 			table[2][7 + i] = '0';
 			table[2][8 + i] = '0';
-			table[2][9 + i] = (char)(timers[i / 10] + 48);
+			table[2][9 + i] = (char)(kassa[i / 10].getUnique() + 48);
 		}
 		table[2][10 + i] = ']';
 	}
 	// [ccc]
-	for (i = 0; i < 45 && i / 10 < kass; i += 10) {
-		if (K[1][i / 10] == 0) continue;
+	for (i = 0; i < 45 && i / 10 < kassa.getAmount(); i += 10) {
+		if (kassa[i / 10].getType() == 0) continue;
 		table[4][6 + i] = '[';
-		table[4][7 + i] = (char)K[1][i / 10];
-		if (K[2][i / 10] > 9) {
-			table[4][8 + i] = (char)((int)(K[2][i / 10] / 10) + 48);
-			table[4][9 + i] = (char)(K[2][i / 10] % 10 + 48);
+		table[4][7 + i] = (char)kassa[i / 10].getType();
+		if (kassa[i / 10].getNumber() > 9) {
+			table[4][8 + i] = (char)((int)(kassa[i / 10].getNumber() / 10) + 48);
+			table[4][9 + i] = (char)(kassa[i / 10].getNumber() % 10 + 48);
 		}
 		else {
 			table[4][8 + i] = '0';
-			table[4][9 + i] = (char)(K[2][i / 10] + 48);
+			table[4][9 + i] = (char)(kassa[i / 10].getNumber() + 48);
 		}
 		table[4][10 + i] = ']';
 	}
 	// [qqq]...
-	for (i = 6, n = 0; i < 17 && n < nq; i++, n++) {
+	for (i = 6, n = 0; i < 17 && n < queue.size(); i++, n++) {
 		table[i][6] = '[';
-		table[i][7] = (char)queue[0][n];
+		table[i][7] = (char)queue[n].getType();
 		if (queue[1][n] < 10) {
 			table[i][8] = '0';
 			table[i][9] = (char)(queue[1][n] + 48);

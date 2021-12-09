@@ -1,4 +1,5 @@
 #include "units.h"
+#include <iostream>
 
 void OfferUnit::setNumber(int number)
 {
@@ -33,6 +34,12 @@ int QueueUnit::getUnique() const
 void QueueUnit::setUnique(int time)
 {
     this->time = time;
+}
+void QueueUnit::print() const
+{
+    std::cout << this->getNumber() << "\n";
+    std::cout << this->getType() << "\n";
+    std::cout << this->getUnique() << "\n";
 }
 
 

@@ -137,7 +137,6 @@ void UnitsCollection<T>::del(const int &i)
     else
         throw "index out of range";
 }
-
 template <typename T>
 void UnitsCollection<T>::delAll()
 {
@@ -153,3 +152,13 @@ void UnitsCollection<T>::delAll()
         first = nullptr;
     }
 };
+template <typename T>
+void UnitsCollection<T>::printAll() const
+{
+    node *now = first;
+    while (now != nullptr)
+    {
+        now->info.print();
+        now = now->next;
+    }
+}
