@@ -10,6 +10,6 @@ int main()
     UnitsCollection<StatUnit> stat;
     int n = 0;
     Control control;
-    control.enter(kass, queue, stat, n);
+    //control.enter(kass, queue, stat, n);
     return 0;
 }

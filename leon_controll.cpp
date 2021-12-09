@@ -96,67 +96,67 @@ void Control::printQueue(const Kasses &kassa, const UnitsCollection<QueueUnit> &
 	for (i = 6, n = 0; i < 17 && n < queue.size(); i++, n++) {
 		table[i][6] = '[';
 		table[i][7] = (char)queue[n].getType();
-		if (queue[1][n] < 10) {
+		if (queue[n].getNumber() < 10) {
 			table[i][8] = '0';
-			table[i][9] = (char)(queue[1][n] + 48);
+			table[i][9] = (char)(queue[n].getNumber() + 48);
 		}
 		else {
-			table[i][8] = (char)((int)(queue[1][n] / 10) + 48);
-			table[i][9] = (char)(queue[1][n] % 10 + 48);
+			table[i][8] = (char)((int)(queue[n].getNumber() / 10) + 48);
+			table[i][9] = (char)(queue[n].getNumber() % 10 + 48);
 		}
 		table[i][10] = ']';
 	}
-	if (n < nq) {
+	if (n < queue.size()) {
 		table[16][11] = '[';
-		table[16][12] = (char)queue[0][n];
-		if (queue[1][n] < 10) {
+		table[16][12] = (char)queue[n].getType();
+		if (queue[n].getNumber() < 10) {
 			table[16][13] = '0';
-			table[16][14] = (char)(queue[1][n] + 48);
+			table[16][14] = (char)(queue[n].getNumber() + 48);
 		}
 		else {
-			table[16][13] = (char)((int)(queue[1][n] / 10) + 48);
-			table[16][14] = (char)(queue[1][n] % 10 + 48);
+			table[16][13] = (char)((int)(queue[n].getNumber() / 10) + 48);
+			table[16][14] = (char)(queue[n].getNumber() % 10 + 48);
 		}
 		table[16][15] = ']';
 		n++;
 	}
-	for (i = 16; i > 8 && n < nq; i--, n++) {
+	for (i = 16; i > 8 && n < queue.size(); i--, n++) {
 		table[i][16] = '[';
-		table[i][17] = (char)queue[0][n];
-		if (queue[1][n] < 10) {
+		table[i][17] = (char)queue[n].getType();
+		if (queue[n].getNumber() < 10) {
 			table[i][18] = '0';
-			table[i][19] = (char)(queue[1][n] + 48);
+			table[i][19] = (char)(queue[n].getNumber() + 48);
 		}
 		else {
-			table[i][18] = (char)((int)(queue[1][n] / 10) + 48);
-			table[i][19] = (char)(queue[1][n] % 10 + 48);
+			table[i][18] = (char)((int)(queue[n].getNumber() / 10) + 48);
+			table[i][19] = (char)(queue[n].getNumber() % 10 + 48);
 		}
 		table[i][20] = ']';
 	}
-	if (n < nq) {
+	if (n < queue.size()) {
 		table[9][21] = '[';
-		table[9][22] = (char)queue[0][n];
-		if (queue[1][n] < 10) {
+		table[9][22] = (char)queue[n].getType();
+		if (queue[n].getNumber() < 10) {
 			table[9][23] = '0';
-			table[9][24] = (char)(queue[1][n] + 48);
+			table[9][24] = (char)(queue[n].getNumber() + 48);
 		}
 		else {
-			table[9][23] = (char)((int)(queue[1][n] / 10) + 48);
-			table[9][24] = (char)(queue[1][n] % 10 + 48);
+			table[9][23] = (char)((int)(queue[n].getNumber() / 10) + 48);
+			table[9][24] = (char)(queue[n].getNumber() % 10 + 48);
 		}
 		table[9][25] = ']';
 		n++;
 	}
-	for (i = 9; i < 17 && n < nq; i++, n++) {
+	for (i = 9; i < 17 && n < queue.size(); i++, n++) {
 		table[i][26] = '[';
-		table[i][27] = (char)queue[0][n];
-		if (queue[1][n] < 10) {
+		table[i][27] = (char)queue[n].getType();
+		if (queue[n].getNumber() < 10) {
 			table[i][28] = '0';
-			table[i][29] = (char)(queue[1][n] + 48);
+			table[i][29] = (char)(queue[n].getNumber() + 48);
 		}
 		else {
-			table[i][28] = (char)((int)(queue[1][n] / 10) + 48);
-			table[i][29] = (char)(queue[1][n] % 10 + 48);
+			table[i][28] = (char)((int)(queue[n].getNumber() / 10) + 48);
+			table[i][29] = (char)(queue[n].getNumber() % 10 + 48);
 		}
 		table[i][30] = ']';
 	}

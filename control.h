@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <conio.h>
+//#include <conio.h>
 //#include <Windows.h>
 #include <string.h>
 #include <stdlib.h>
@@ -23,7 +23,7 @@ private:
     // nType - заданное количество типов
     // times[] - заданное время обработки каждого типа
 public:
-    void printQueue();
+    void printQueue(const Kasses &kassa, const UnitsCollection<QueueUnit> &queue) const;
     void printStat();
     int queueCount();
     void makeStat();
