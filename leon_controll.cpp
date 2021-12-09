@@ -3,6 +3,7 @@
 #include "units.h"
 #include "collection.h"
 #include <string.h>
+#define _CRT_SECURE_NO_WARNINGS
 
 /*
 K[0] - время до конца обслуживания
@@ -15,7 +16,7 @@ queue[1] - номер заявки
 queue[2] - время в очереди
 */
 
-void Control::printQueue(const Kasses &kassa, const UnitsCollection<QueueUnit> &queue) const
+void Control::printQueue(Kasses &kassa, const UnitsCollection<QueueUnit> &queue) const
 {
 	int i, n;
 	char table[20][80];

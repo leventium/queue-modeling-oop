@@ -23,13 +23,13 @@ private:
     // nType - заданное количество типов
     // times[] - заданное время обработки каждого типа
 public:
-    void printQueue(const Kasses &kassa, const UnitsCollection<QueueUnit> &queue) const;
+    void printQueue(Kasses &kassa, const UnitsCollection<QueueUnit> &queue) const;
     void printStat();
-    int queueCount(Kasses& kass, UnitsCollection<QueueUnit>& queue);
+    int queueCount(Kasses &kass, UnitsCollection<QueueUnit> &queue);
     void makeStat();
 
     int read(void);
-    void check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int &n, Kasses &kass);
+    void check(UnitsCollection<QueueUnit> &queue, UnitsCollection<StatUnit> &stat, int &n, Kasses &kass);
     void enter(Kasses &kass, UnitsCollection<QueueUnit> &queue, UnitsCollection<StatUnit> &stat, int &n);
 };
 
