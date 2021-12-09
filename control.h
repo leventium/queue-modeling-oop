@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <conio.h>
+//#include <conio.h>
 //#include <Windows.h>
 #include <string.h>
 #include <stdlib.h>
@@ -17,8 +17,10 @@ using namespace std;
 class Control
 {
 private:
-    int dayTime, nType, times[5];
-    // dayTime - заданное время дня
+    int workTime, nowTime, dayTime, nType, times[5];
+	// workTime - время рабочего дня (вводится один раз)
+	// nowTime - текущее время (меняется каждую секунду)
+    // dayTime - подлежит удалению
     // nType - заданное количество типов
     // times[] - заданное время обработки каждого типа
 public:
