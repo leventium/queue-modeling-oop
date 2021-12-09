@@ -106,24 +106,33 @@ template <typename T>
 void UnitsCollection<T>::del(const int &i)
 // &i - index
 {
-    if (first != nullptr)
+    if (first != nullptr && i >= 0)
     {
-        node *now = first;
-        int ind = 0;
-        while (ind < i - 1)
+        if (i == 0)
         {
-            now = now->next;
-            ++ind;
-        }
-        if (now != nullptr && now->next != nullptr)
-        {
-            node *sled;
-            sled = now->next->next;
-            delete now->next;
-            now->next = sled;
+            node *now = first->next;
+            delete first;
+            first = now;
         }
         else
-            throw "index out of range";
+        {
+            node *now = first;
+            int ind = 0;
+            while (ind < i - 1)
+            {
+                now = now->next;
+                ++ind;
+            }
+            if (now != nullptr && now->next != nullptr)
+            {
+                node *sled;
+                sled = now->next->next;
+                delete now->next;
+                now->next = sled;
+            }
+            else
+                throw "index out of range";
+        }
     }
     else
         throw "index out of range";
