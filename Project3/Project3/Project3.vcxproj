@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="collection.cpp" />
     <ClCompile Include="kasses.cpp" />
+    <ClCompile Include="leon_control.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="units.cpp" />
   </ItemGroup>

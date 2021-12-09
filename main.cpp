@@ -13,5 +13,7 @@ int main()
     Control control;
     control.enter(kass, queue, stat, n);
     queue.printAll();
+    kass[0] = queue[0];
+    control.printQueue(kass, queue);
     return 0;
 }
