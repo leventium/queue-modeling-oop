@@ -18,17 +18,18 @@ class Control
 {
 private:
 	int workTime, nowTime, nType, times[5];
-	// workTime - ����� �������� ��� (�������� ���� ���)
-	// nowTime - ������� ����� (�������� ������ �������)
-	// nType - �������� ���������� �����
-	// times[] - �������� ����� ��������� ������� ����
+	// workTime - work day time (doesn't change)
+	// nowTime - now time (changes every second)
+	// nType - amount of types
+	// times[] - serve time for every type
 public:
 	void printQueue(Kasses& kassa, 
 		const UnitsCollection<QueueUnit>& queue) const;
-	void printStat();
+	void printStat(UnitsCollection<StatUnit>& stat);
 	int queueCount(const int &kass, UnitsCollection<QueueUnit> &queue);
-	void makeStat(UnitsCollection<QueueUnit> &queue, UnitsCollection<StatUnit>
-		&stat, Kasses &kassa, int* count, int* flag, int* d);
+	void makeStat(UnitsCollection<QueueUnit> &queue,
+		UnitsCollection<StatUnit> &stat, Kasses &kassa,
+			int &count, int &flag, int &repeats);
 	int chooseTime(UnitsCollection<QueueUnit> &queue);
 
 	int read(void);
@@ -36,7 +37,15 @@ public:
 		UnitsCollection<StatUnit>& stat, int& n, Kasses& kass);
 	void enter(Kasses& kass, UnitsCollection<QueueUnit>& queue,
 		UnitsCollection<StatUnit>& stat, int& n);
+	
+	int getWorkTime();
+	int getNowTime();
+	void setNowTime(int nowTime);
 };
+
+int Control::getWorkTime() { return workTime; }
+int Control::getNowTime() { return nowTime; }
+void Control::setNowTime(int nowTime) { this->nowTime = nowTime; }
 
 int Control::read(void)
 {
@@ -120,7 +129,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue,
 				timeoch = queueCount(kass.getAmount(), queue1);
 				//cout << timeoch << endl;
 				//timeoch = 1;
-				if (timeoch > nowTime)
+				if (timeoch > workTime)
 					//������� ������������ ������� �� ������� ��������� ������
 				{
 					//������ � ����������
@@ -143,7 +152,7 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue,
 	int i, a;
 	{
 		cout << "Enter the number of application types (maximum 5)";
-		nType = read();
+		nType = this->read();
 	} while ((nType > 5));
 
 	for (i = 0; i < nType; i++)
@@ -152,7 +161,7 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue,
 		{
 			cout << "Enter for " << (char)(65 + i) << " type application
 				processing time (in seconds from 1 to 30)";
-			times[i] = read();
+			times[i] = this->read();
 		} while ((times[i] > 30));
 	}
 
@@ -160,13 +169,13 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue,
 	{
 		cout << "Enter the length of the working day in seconds 
 			(in seconds from 30 to 300)";
-		nowTime = read();
-	} while ((nowTime < 30) || (nowTime > 300));
+		workTime = read();
+	} while ((workTime < 30) || (workTime > 300));
 
 	do
 	{
 		cout << "Enter the number of cash registers (maximum 5)";
-		a = read();
+		a = this->read();
 	} while ((a > 5));
 	kass.setAmount(a);
 
@@ -422,7 +431,7 @@ stat[3] - order's time in queue
 
 void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 	UnitsCollection<StatUnit> &stat, Kasses &kassa,
-		int &count, int &flag, int &d) 
+		int &count, int &flag, int &repeats)
 {
 	StatUnit tmp;
 	int min, fl = 0;
@@ -439,7 +448,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 				{
 					tmp = StatUnit(kassa[i], 1);
 					stat << tmp;
-					++d;
+					++repeats;
 				}
 				kassa[i] = queue[0];
 				queue.del(0);
@@ -466,6 +475,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 				stat << tmp;
 				kassa[i].setUnique(0);
 				kassa[i].setType(0);
+				++repeats;
 			}
 			else 
 				if (kassa[i].getUnique() != 0)
@@ -481,7 +491,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 	}
 }
 
-void printStat(UnitsCollection<StatUnit>& stat) {
+void Control::printStat(UnitsCollection<StatUnit>& stat) {
 	for (int i = 0; i < stat.size(); i++) {
 		cout << (char)stat[i].getNumber() 
 			<< "[" << stat[i].getType() << "] - ";
