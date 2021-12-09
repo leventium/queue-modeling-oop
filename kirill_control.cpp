@@ -57,7 +57,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 	{
 		if ((65 <= (int)C[i]) && ((int)C[i] <= (69 - (5 - nType))))  //проверка вводимого символа
 		{
-			if (queue.size >= 30) //условие переполнения очереди по количеству заявок
+			if (queue.size() >= 30) //условие переполнения очереди по количеству заявок
 			{ //запись в статистику
 				n++;
 				statOne.setNumber(n);
@@ -71,23 +71,22 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 				queueOne.setNumber(n);
 				queueOne.setType((int)C[i]);
 				queueOne.setUnique(times[(int)C[i]]);
-				for (w = 0; w <= queue.size; w++)
+				queue1.delAll();
+				for (w = 0; w <= queue.size(); w++)
 				{
-					queue1[0][w] = queue[0][w];
-					queue1[1][w] = queue[1][w];
+					queue1 << queue[w];
 				}
-				(*nqueue)++;
-				nqueue1 = *nqueue;
-				timeoch = QueueCount(kass, time, nqueue1, queue1);
+				//timeoch = QueueCount(kass, time, nqueue1, queue1);
 				//cout << timeoch << endl;
-				if (timeoch > timework) //условие переполнения очереди по времени обработки заявок
+				timeoch = 1;
+				if (timeoch > dayTime) //условие переполнения очереди по времени обработки заявок
 				{
 					//запись в статистику
-					(*nqueue)--;
-					stat[0][*nstat] = (int)C[i];
-					stat[1][*nstat] = *n;
-					stat[2][*nstat] = 0;
-					(*nstat)++;
+					queue.del(queue.size());
+					statOne.setNumber(n);
+					statOne.setType((int)C[i]);
+					statOne.setUnique(0);
+					stat << statOne;
 				}
 
 			}
@@ -126,9 +125,9 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 	} while ((a > 5));
 	kass.setAmount(a);
 
-	do
+	/*do
 	{
 		check(queue, stat, nstat, nqueue, n, *timework, *kass, time, *ntype);
-	} while (queue.size == 0); //the case when the user did not enter anything or entered the wrong characters
+	} while (queue.size() == 0);*/ //the case when the user did not enter anything or entered the wrong characters
 
 }
