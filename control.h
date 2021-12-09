@@ -17,7 +17,7 @@ using namespace std;
 class Control
 {
 private:
-    int workTime, nowTime, dayTime, nType, times[5];
+    int workTime, nowTime, nType, times[5];
 	// workTime - время рабочего дня (вводится один раз)
 	// nowTime - текущее время (меняется каждую секунду)
     // dayTime - подлежит удалению
