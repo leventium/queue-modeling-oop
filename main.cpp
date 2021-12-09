@@ -1,7 +1,8 @@
 #include <iostream>
 #include "units.h"
-#include "collection.h"
+//#include "collection.h"
 #include "control.h"
+//#include "kirill_control.cpp"
 #include "collection.cpp"
 #include "kasses.h"
 
@@ -13,7 +14,7 @@ int main()
     UnitsCollection<StatUnit> stat;
     int n = 0;
     test.setNumber(10);
-    kass.setAmount(10);
+    kass.setAmount(3);
     kass[0] = test;
     
     std::cout << kass[2].getNumber() << "\n\n";
