@@ -130,4 +130,4 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 		check(queue, stat, nstat, nqueue, n, *timework, *kass, time, *ntype);
 	} while (queue.size() == 0);*/ //the case when the user did not enter anything or entered the wrong characters
 
-}
+//}
