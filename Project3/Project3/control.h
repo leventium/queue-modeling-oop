@@ -323,3 +323,16 @@ void Control::printQueue(Kasses& kassa, const UnitsCollection<QueueUnit>& queue)
 	}
 	for (int i = 0; i < 19; i++) cout << table[i] << endl;
 }
+
+void printStat(UnitsCollection<StatUnit>& stat) {
+	for (int i = 0; i < stat.size(); i++) {
+		cout << (char)stat[i].getNumber() << "[" << stat[i].getType() << "] - ";
+		if (stat[i].getUnique()) {
+			cout << "одобрено;";
+		}
+		else {
+			cout << "отказано;";
+		}
+		cout << endl;
+	}
+}
