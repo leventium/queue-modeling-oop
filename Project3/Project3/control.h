@@ -18,15 +18,16 @@ class Control
 {
 private:
 	int workTime, nowTime, nType, times[5];
-	// workTime - время рабочего дня (вводится один раз)
-	// nowTime - текущее время (меняется каждую секунду)
-	// nType - заданное количество типов
-	// times[] - заданное время обработки каждого типа
+	// workTime - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ)
+	// nowTime - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+	// nType - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	// times[] - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 public:
 	void printQueue(Kasses& kassa, const UnitsCollection<QueueUnit>& queue) const;
 	void printStat();
-	int queueCount(Kasses& kass, UnitsCollection<QueueUnit>& queue);
+	int queueCount(const int &kass, UnitsCollection<QueueUnit> &queue);
 	void makeStat();
+	int chooseTime(UnitsCollection<QueueUnit> &queue);
 
 	int read(void);
 	void check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>& stat, int& n, Kasses& kass);
@@ -74,7 +75,7 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 	QueueUnit queueOne;
 	StatUnit statOne;
 	int ch, i, j, q, nc, timeoch, w;
-	//timeoch - время обработки текущей очереди, nc - количество элементов в массиве C, queue1 - копия матрицы очереди
+	//timeoch - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, nc - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ C, queue1 - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	cout << "Enter the queue in the format: ABDABC" << endl;
 	j = n;
 	i = 0;
@@ -91,17 +92,17 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 
 	for (i = 0; i <= nc; i++)
 	{
-		if ((65 <= (int)C[i]) && ((int)C[i] <= (69 - (5 - nType))))  //проверка вводимого символа
+		if ((65 <= (int)C[i]) && ((int)C[i] <= (69 - (5 - nType))))  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			if (queue.size() >= 30) //условие переполнения очереди по количеству заявок
-			{ //запись в статистику
+			if (queue.size() >= 30) //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+			{ //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				n++;
 				statOne.setNumber(n);
 				statOne.setType((int)C[i]);
 				statOne.setUnique(0);
 				stat << statOne;
 			}
-			else //запись в очередь
+			else //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			{
 				n++;
 				queueOne.setNumber(n);
@@ -116,9 +117,9 @@ void Control::check(UnitsCollection<QueueUnit>& queue, UnitsCollection<StatUnit>
 				//timeoch = QueueCount(kass, time, nqueue1, queue1);
 				//cout << timeoch << endl;
 				timeoch = 1;
-				if (timeoch > nowTime) //условие переполнения очереди по времени обработки заявок
+				if (timeoch > nowTime) //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 				{
-					//запись в статистику
+					//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					queue.del(queue.size());
 					statOne.setNumber(n);
 					statOne.setType((int)C[i]);
@@ -170,11 +171,6 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue, UnitsCollec
 	} while (c == 0); //the case when the user did not enter anything or entered the wrong characters
 
 }
-
-/*int Control::queueCount(Kasses& kass, UnitsCollection<QueueUnit>& queue)
-{
-
-}*/
 
 void Control::printQueue(Kasses& kassa, const UnitsCollection<QueueUnit>& queue) const
 {
@@ -322,4 +318,63 @@ void Control::printQueue(Kasses& kassa, const UnitsCollection<QueueUnit>& queue)
 		table[i][30] = ']';
 	}
 	for (int i = 0; i < 19; i++) cout << table[i] << endl;
+}
+
+int Control::chooseTime(UnitsCollection<QueueUnit> &queue)
+{
+	int ch;
+	if (queue.size() != 0)
+	{
+		ch = queue[0].getType();
+		queue.del(0);
+	}
+	else
+	{
+		ch = 100;
+	}
+	switch (ch)
+	{
+		case (int)'A': return times[0]; break;
+		case (int)'B': return times[1]; break;
+		case (int)'C': return times[2]; break;
+		case (int)'D': return times[3]; break;
+		case (int)'E': return times[4]; break;
+		default: return 0; break;
+	}
+}
+
+/*
+K[0] - РІСЂРµРјСЏ РґРѕ РєРѕРЅС†Р° РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
+K[1] - С‚РёРї Р·Р°СЏРІРєРё
+K[2] - РЅРѕРјРµСЂ Р·Р°СЏРІРєРё
+K[3] - РІСЂРµРјСЏ РІ РѕС‡РµСЂРµРґРё
+
+queue[0] - С‚РёРї Р·Р°СЏРІРєРё
+queue[1] - РЅРѕРјРµСЂ Р·Р°СЏРІРєРё
+queue[2] - РІСЂРµРјСЏ РІ РѕС‡РµСЂРµРґРё
+*/
+
+int Control::queueCount(const int &kass, UnitsCollection<QueueUnit> &queue)
+{
+	int K[5], min, count = 0;
+	// K[] - РѕСЃС‚Р°РІС€РµРµСЃСЏ РІСЂРµРјСЏ РЅР° РєР°Р¶РѕР№ РєР°СЃСЃРµ, min - РјРёРЅРёРјСѓРј, count - СЃСѓРјРјР°СЂРЅРѕРµ РІСЂРµРјСЏ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ
+	for (int i = 0; i < kass; i++)
+		K[i] = this->chooseTime(queue);
+	while (queue.size() > 0) {
+		min = K[0];
+		for (int i = 1; i < kass; i++)
+			if (K[i] < min) min = K[i];
+		for (int i = 0; i < kass; i++) {
+			if (K[i] == min)
+				K[i] = this->chooseTime(queue);
+			else
+				K[i] -= min;
+		}
+		count += min;
+	}
+	min = 0;
+	for (int i = 0; i < kass; i++)
+		if (K[i] > min) min = K[i];
+	count += min;
+	return count;
 }
