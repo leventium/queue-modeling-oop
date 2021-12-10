@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <conio.h>
-//#include <Windows.h>
+#include <Windows.h>
 #include <string.h>
 #include <stdlib.h>
 #include "collection.h"
@@ -159,16 +159,16 @@ void Control::enter(Kasses& kass, UnitsCollection<QueueUnit>& queue,
 	{
 		do
 		{
-			cout << "Enter for " << (char)(65 + i) << " type application
-				processing time (in seconds from 1 to 30)";
+			cout << "Enter for " << (char)(65 + i) <<
+			" type application processing time (in seconds from 1 to 30)";
 			times[i] = this->read();
 		} while ((times[i] > 30));
 	}
 
 	do
 	{
-		cout << "Enter the length of the working day in seconds 
-			(in seconds from 30 to 300)";
+		cout << 
+		"Enter the length of the working day in seconds (in seconds from 30 to 300)";
 		workTime = read();
 	} while ((workTime < 30) || (workTime > 300));
 
@@ -479,7 +479,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 			}
 			else 
 				if (kassa[i].getUnique() != 0)
-					kassa[i].setUnique(kassa[i].getUnique - min);
+					kassa[i].setUnique(kassa[i].getUnique() - min);
 		}
 		count += min;
 		if (kassa[0].getType() <= 0 && 
