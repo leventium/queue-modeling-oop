@@ -79,7 +79,7 @@ int main()
                     screen.check(queue, stat, n, kassa);
                     break;
                 case 2:
-                    screen.printStat(stat));
+                    screen.printStat(stat);
                     std::cout << "> Continue.";
                     ch = _getch();
                     while (ch != 13)
