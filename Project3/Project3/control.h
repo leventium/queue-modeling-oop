@@ -469,7 +469,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 				min = kassa[i].getUnique();
 		for (int i = 0; i < kassa.getAmount(); i++)
 		{
-			if (kassa[i].getUnique() == min && K[1][i] != 0)
+			if (kassa[i].getUnique() == min && kassa[i].getType() != 0)
 			{
 				tmp = StatUnit(kassa[i], 1);
 				stat << tmp;
