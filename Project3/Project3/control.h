@@ -507,24 +507,30 @@ void makeStat(UnitsCollection<QueueUnit> &queue,
 {
 	int min;
 	StatUnit tmp;
-	if (queue.size() > 0) {
+	if (queue.size() > 0)
+	{
 		min = kassa[0].getUnique();
 		for (int i = 1; i < kassa.getAmount(); i++)
 			if (kassa[i].getUnique() < min) min = kassa[i].getUnique();
-		for (int i = 0; i < kassa.getAmount(); i++) {
-			if (kassa[i].getUnique() == min) {
-				if (queue.size() != 0) {
-					if (kassa[i].getType() != 0) {
+		for (int i = 0; i < kassa.getAmount(); i++)
+		{
+			if (kassa[i].getUnique() == min)
+			{
+				if (queue.size() != 0)
+				{
+					if (kassa[i].getType() != 0)
+					{
 						tmp = StatUnit(kassa[i], 1);
 						stat << tmp;
 						++repeats;
-						K[0][i] = tet(times, delch(nqueue, queue));
 						kassa[i] = queue[0];
 						queue.del(0);
 					}
 				}
-				else {
-					if (kassa[i].getType() != 0) {
+				else
+				{
+					if (kassa[i].getType() != 0)
+					{
 						tmp = StatUnit(kassa[i], 1);
 						stat << tmp;
 						kassa[i].setType(0);
@@ -540,17 +546,21 @@ void makeStat(UnitsCollection<QueueUnit> &queue,
 		}
 		count += min;
 	}
-	else {
+	else
+	{
 		min = 1000;
 		for (int i = 0; i < kassa.getAmount(); i++)
-			if (kassa[0].getUnique() < min && kassa[i].getType() != 0) 
-				min = kassa[0].getUnique();
-		for (int i = 0; i < kassa.getAmount(); i++) {
-			if (kassa[0].getUnique() == min && kassa[i].getType() != 0) {
+			if (kassa[i].getUnique() < min && kassa[i].getType() != 0) 
+				min = kassa[i].getUnique();
+		for (int i = 0; i < kassa.getAmount(); i++)
+		{
+			if (kassa[i].getUnique() == min && kassa[i].getType() != 0)
+			{
 				tmp = StatUnit(kassa[i], 1);
 				stat << tmp;
 				kassa[i].setUnique(0);
 				kassa[i].setType(0);
+				kassa[i].setNumber(0);
 				++repeats;
 			}
 			else
@@ -567,16 +577,16 @@ void makeStat(UnitsCollection<QueueUnit> &queue,
 	}
 }
 
-void Control::printStat(UnitsCollection<StatUnit>& stat) {
-	for (int i = 0; i < stat.size(); i++) {
-		cout << (char)stat[i].getNumber() 
-			<< "[" << stat[i].getType() << "] - ";
-		if (stat[i].getUnique()) {
+void Control::printStat(UnitsCollection<StatUnit>& stat)
+{
+	for (int i = 0; i < stat.size(); i++)
+	{
+		cout << (char)stat[i].getType() 
+			<< "[" << stat[i].getNumber() << "] - ";
+		if (stat[i].getUnique())
 			cout << "approved;";
-		}
-		else {
+		else
 			cout << "denied;";
-		}
 		cout << endl;
 	}
 }
