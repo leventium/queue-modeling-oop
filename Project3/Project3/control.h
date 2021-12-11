@@ -419,22 +419,9 @@ int Control::queueCount(const int &kass, UnitsCollection<QueueUnit> &queue)
 	return count;
 }
 
+
+
 /*
-K[0] - time to end of serve
-K[1] - order's type
-K[2] - order's number
-K[3] - order's time in queue
-
-queue[0] - order's type
-queue[1] - order's number
-queue[2] - order's time in queue
-
-stat[0] - order's type
-stat[1] - order's number
-stat[2] - status
-stat[3] - order's time in queue
-*/
-
 void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 	UnitsCollection<StatUnit> &stat, Kasses &kassa,
 		int &count, int &flag, int &repeats)
@@ -493,6 +480,89 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 			kassa[2].getType() <= 0 && 
 			kassa[3].getType() <= 0 && 
 			kassa[4].getType() <= 0)
+			flag = 0;
+	}
+}
+*/
+
+/*
+K[0] - time to end of serve
+K[1] - order's type
+K[2] - order's number
+K[3] - order's time in queue
+
+queue[0] - order's type
+queue[1] - order's number
+queue[2] - order's time in queue
+
+stat[0] - order's type
+stat[1] - order's number
+stat[2] - status
+stat[3] - order's time in queue
+*/
+
+void makeStat(UnitsCollection<QueueUnit> &queue,
+	UnitsCollection<StatUnit> &stat, Kasses &kassa,
+		int &count, int &flag, int &repeats)
+{
+	int min;
+	StatUnit tmp;
+	if (queue.size() > 0) {
+		min = kassa[0].getUnique();
+		for (int i = 1; i < kassa.getAmount(); i++)
+			if (kassa[i].getUnique() < min) min = kassa[i].getUnique();
+		for (int i = 0; i < kassa.getAmount(); i++) {
+			if (kassa[i].getUnique() == min) {
+				if (queue.size() != 0) {
+					if (kassa[i].getType() != 0) {
+						tmp = StatUnit(kassa[i], 1);
+						stat << tmp;
+						++repeats;
+						K[0][i] = tet(times, delch(nqueue, queue));
+						kassa[i] = queue[0];
+						queue.del(0);
+					}
+				}
+				else {
+					if (kassa[i].getType() != 0) {
+						tmp = StatUnit(kassa[i], 1);
+						stat << tmp;
+						kassa[i].setType(0);
+						kassa[i].setNumber(0);
+						kassa[i].setUnique(0);
+						++repeats;
+					}
+				}
+			}
+			else
+				if (kassa[i].getUnique() != 0)
+					kassa[i].setUnique(kassa[i].getUnique() - min);
+		}
+		count += min;
+	}
+	else {
+		min = 1000;
+		for (int i = 0; i < kassa.getAmount(); i++)
+			if (kassa[0].getUnique() < min && kassa[i].getType() != 0) 
+				min = kassa[0].getUnique();
+		for (int i = 0; i < kassa.getAmount(); i++) {
+			if (kassa[0].getUnique() == min && kassa[i].getType() != 0) {
+				tmp = StatUnit(kassa[i], 1);
+				stat << tmp;
+				kassa[i].setUnique(0);
+				kassa[i].setType(0);
+				++repeats;
+			}
+			else
+				if (kassa[i].getUnique() != 0)
+					kassa[i].setUnique(kassa[i].getUnique - min);
+		}
+		count += min;
+		if (kassa[0].getType() <= 0 && 
+			kassa[1].getType() <= 0 && 
+			kassa[2].getType() <= 0 && 
+			kassa[3].getType() <= 0 && 
+			kassa[4].getType() <= 0) 
 			flag = 0;
 	}
 }
