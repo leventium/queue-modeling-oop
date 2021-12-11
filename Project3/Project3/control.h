@@ -23,6 +23,7 @@ private:
 	// nType - amount of types
 	// times[] - serve time for every type
 public:
+	Control();
 	void printQueue(Kasses& kassa, 
 		const UnitsCollection<QueueUnit>& queue) const;
 	void printStat(UnitsCollection<StatUnit>& stat);
@@ -42,6 +43,11 @@ public:
 	int getNowTime();
 	void setNowTime(int nowTime);
 };
+
+Control::Control()
+{
+	nowTime = 0;
+}
 
 int Control::getWorkTime() { return workTime; }
 int Control::getNowTime() { return nowTime; }
