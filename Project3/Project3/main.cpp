@@ -12,13 +12,22 @@ int main()
     UnitsCollection<StatUnit> stat;
     Kasses kassa;
     Control screen;
-    int n = 0, count = 0, flag = 1, repeats = 0, toEnd = 1, min, ch;
+    int n = 0, flag = 1, toEnd = 1, min, ch;
 
     screen.enter(kassa, queue, stat, n);
     for (int i = 0; i < kassa.getAmount(); ++i)
     {
-        kassa[i] = queue[0];
-        queue.del(0);
+        if (queue.size() != 0)
+        {
+            kassa[i] = queue[0];
+            queue.del(0);
+        }
+        else
+        {
+            kassa[i].setNumber(0);
+            kassa[i].setType(0);
+            kassa[i].setUnique(0);
+        }
     }
     while (flag)
     {
@@ -26,19 +35,21 @@ int main()
         screen.printQueue(kassa, queue);
         min = kassa[0].getUnique();
         for (int i = 1; i < kassa.getAmount(); ++i)
-            if (kassa[i].getUnique() < min && kassa[i].getUnique() != 0)
+            if (kassa[i].getUnique() < min && kassa[i].getType() != 0)
                 min = kassa[i].getUnique();
+        for (int i = 0; i < kassa.getAmount(); ++i)
+            screen.setTimers(i, kassa[i].getUnique());
         for (int i = 0; i < min; ++i)
         {
             screen.setNowTime(screen.getNowTime() + 1);
             for (int j = 0; j < kassa.getAmount(); ++j)
-                kassa[j].setUnique(kassa[j].getUnique() - 1);
+                screen.setTimers(screen.getTimers() - 1);
             Sleep(1000);
             system("cls");
             screen.printQueue(kassa, queue);
         }
-        screen.makeStat(queue, stat, kassa, count, flag, repeats);
-        if (!toEnd && !(repeats % 5))
+        screen.makeStat(queue, stat, kassa, flag);
+        if (!toEnd && !(screen.getRepeats() % 5))
         {
             system("cls");
             screen.printQueue(kassa, queue);
@@ -92,7 +103,7 @@ int main()
         }
     }
     system("cls");
-    std::cout << "Spended time: " << count << "\n";
+    std::cout << "Spended time: " << screen.getTimeCount() << "\n";
     screen.printStat(stat);
     std::cout << "> Continue.";
     ch = _getch();

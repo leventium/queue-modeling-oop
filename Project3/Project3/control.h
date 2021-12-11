@@ -17,7 +17,7 @@ using namespace std;
 class Control
 {
 private:
-	int workTime, nowTime, nType, times[5];
+	int workTime, timeCount, repeats, nowTime, nType, times[5], timers[5];
 	// workTime - work day time (doesn't change)
 	// nowTime - now time (changes every second)
 	// nType - amount of types
@@ -29,8 +29,7 @@ public:
 	void printStat(UnitsCollection<StatUnit>& stat);
 	int queueCount(const int &kass, UnitsCollection<QueueUnit> &queue);
 	void makeStat(UnitsCollection<QueueUnit> &queue,
-		UnitsCollection<StatUnit> &stat, Kasses &kassa,
-			int &count, int &flag, int &repeats);
+		UnitsCollection<StatUnit> &stat, Kasses &kassa, int &flag);
 	int chooseTime(UnitsCollection<QueueUnit> &queue);
 
 	int read(void);
@@ -42,16 +41,29 @@ public:
 	int getWorkTime();
 	int getNowTime();
 	void setNowTime(int nowTime);
+	int getTimeCount();
+	int getRepeats();
+	int getTimers(int i);
+	void setTimers(int i, int value);
 };
 
 Control::Control()
 {
 	nowTime = 0;
+	timeCount = 0;
+	repeats = 0;
+	for (int i = 0; i < 5; ++i)
+		timers[i] = 0;
 }
 
+int Control::getRepeats() { return repeats; }
+int Control::getTimeCount() {return timeCount; }
 int Control::getWorkTime() { return workTime; }
 int Control::getNowTime() { return nowTime; }
 void Control::setNowTime(int nowTime) { this->nowTime = nowTime; }
+
+int Control::getTimers(int i) { return timers[i]; }
+void Control::setTimers(int i, int value) { timers[i] = value; }
 
 int Control::read(void)
 {
@@ -261,23 +273,23 @@ void Control::printQueue(Kasses& kassa,
 	for (i = 0; i < 45 && i / 10 < kassa.getAmount(); i += 10) {
 		if (kassa[i / 10].getType() == 0) continue;
 		table[2][6 + i] = '[';
-		if (kassa[i / 10].getUnique() > 99) {
-			table[2][7 + i] = (char)((int)(kassa[i / 10].getUnique() 
+		if (timers[i / 10] > 99) {
+			table[2][7 + i] = (char)((int)(timers[i / 10] 
 				/ 100) + 48);
-			table[2][8 + i] = (char)((int)((kassa[i / 10].getUnique() % 100) 
+			table[2][8 + i] = (char)((int)((timers[i / 10] % 100) 
 				/ 10) + 48);
-			table[2][9 + i] = (char)(kassa[i / 10].getUnique() % 10 + 48);
+			table[2][9 + i] = (char)(timers[i / 10] % 10 + 48);
 		}
-		else if (kassa[i / 10].getUnique() > 9) {
+		else if (timers[i / 10] > 9) {
 			table[2][7 + i] = '0';
-			table[2][8 + i] = (char)((int)(kassa[i / 10].getUnique() 
+			table[2][8 + i] = (char)((int)(timers[i / 10] 
 				/ 10) + 48);
-			table[2][9 + i] = (char)(kassa[i / 10].getUnique() % 10 + 48);
+			table[2][9 + i] = (char)(timers[i / 10] % 10 + 48);
 		}
 		else {
 			table[2][7 + i] = '0';
 			table[2][8 + i] = '0';
-			table[2][9 + i] = (char)(kassa[i / 10].getUnique() + 48);
+			table[2][9 + i] = (char)(timers[i / 10] + 48);
 		}
 		table[2][10 + i] = ']';
 	}
@@ -501,9 +513,8 @@ stat[2] - status
 stat[3] - order's time in queue
 */
 
-void makeStat(UnitsCollection<QueueUnit> &queue,
-	UnitsCollection<StatUnit> &stat, Kasses &kassa,
-		int &count, int &flag, int &repeats)
+void Control::makeStat(UnitsCollection<QueueUnit> &queue,
+	UnitsCollection<StatUnit> &stat, Kasses &kassa, int &flag)
 {
 	int min;
 	StatUnit tmp;
@@ -544,7 +555,7 @@ void makeStat(UnitsCollection<QueueUnit> &queue,
 				if (kassa[i].getUnique() != 0)
 					kassa[i].setUnique(kassa[i].getUnique() - min);
 		}
-		count += min;
+		timeCount += min;
 	}
 	else
 	{
@@ -567,7 +578,7 @@ void makeStat(UnitsCollection<QueueUnit> &queue,
 				if (kassa[i].getUnique() != 0)
 					kassa[i].setUnique(kassa[i].getUnique - min);
 		}
-		count += min;
+		timeCount += min;
 		if (kassa[0].getType() <= 0 && 
 			kassa[1].getType() <= 0 && 
 			kassa[2].getType() <= 0 && 
