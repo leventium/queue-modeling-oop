@@ -12,7 +12,7 @@ int main()
     UnitsCollection<StatUnit> stat;
     Kasses kassa;
     Control screen;
-    int n = 0, count = 0, flag = 1, repeats = 0, toEnd = 0, min, ch;
+    int n = 0, count = 0, flag = 1, repeats = 0, toEnd = 1, min, ch;
 
     screen.enter(kassa, queue, stat, n);
     for (int i = 0; i < kassa.getAmount(); ++i)

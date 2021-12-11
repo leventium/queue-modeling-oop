@@ -1,6 +1,3 @@
-﻿  collection.cpp
-  main.cpp
-C:\Project\oop_project\Project3\Project3\control.h(88,16): warning C4101: q: неиспользованная локальная переменная
-C:\Project\oop_project\Project3\Project3\control.h(472,39): error C2065: K: необъявленный идентификатор
-  units.cpp
-  Создание кода...
+﻿  main.cpp
+C:\Project\oop_project\Project3\Project3\control.h(94,16): warning C4101: q: неиспользованная локальная переменная
+  Project3.vcxproj -> C:\Project\oop_project\Project3\Debug\Project3.exe
