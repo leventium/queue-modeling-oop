@@ -18,6 +18,7 @@ class Control
 {
 private:
 	int workTime, timeCount, repeats, nowTime, nType, times[5], timers[5];
+	int flex;
 	// workTime - work day time (doesn't change)
 	// nowTime - now time (changes every second)
 	// nType - amount of types
@@ -45,6 +46,8 @@ public:
 	int getRepeats();
 	int getTimers(int i);
 	void setTimers(int i, int value);
+	int getFlex() const;
+    void setFlex(int flex);
 };
 
 Control::Control()
@@ -56,6 +59,8 @@ Control::Control()
 		timers[i] = 0;
 }
 
+int Control::getFlex() const { return flex; }
+void Control::setFlex(int flex) { this->flex = flex; }
 int Control::getRepeats() { return repeats; }
 int Control::getTimeCount() {return timeCount; }
 int Control::getWorkTime() { return workTime; }
@@ -547,6 +552,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 						kassa[i].setType(0);
 						kassa[i].setNumber(0);
 						kassa[i].setUnique(0);
+						++flex;
 						++repeats;
 					}
 				}
@@ -572,6 +578,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 				kassa[i].setUnique(0);
 				kassa[i].setType(0);
 				kassa[i].setNumber(0);
+				++flex;
 				++repeats;
 			}
 			else
@@ -579,11 +586,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 					kassa[i].setUnique(kassa[i].getUnique() - min);
 		}
 		timeCount += min;
-		if (kassa[0].getNumber() <= 0 && 
-			kassa[1].getNumber() <= 0 && 
-			kassa[2].getNumber() <= 0 && 
-			kassa[3].getNumber() <= 0 && 
-			kassa[4].getNumber() <= 0) 
+		if (flex == 5) 
 			flag = 0;
 	}
 }

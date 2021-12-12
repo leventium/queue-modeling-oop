@@ -15,6 +15,7 @@ int main()
     int n = 0, flag = 1, toEnd = 0, min, ch;
 
     screen.enter(kassa, queue, stat, n);
+    screen.setFlex(5 - kassa.getAmount());
     for (int i = 0; i < kassa.getAmount(); ++i)
     {
         if (queue.size() != 0)
