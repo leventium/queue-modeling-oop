@@ -43,7 +43,7 @@ int main()
         {
             screen.setNowTime(screen.getNowTime() + 1);
             for (int j = 0; j < kassa.getAmount(); ++j)
-                screen.setTimers(screen.getTimers(j) - 1);
+                screen.setTimers(j, screen.getTimers(j) - 1);
             Sleep(1000);
             system("cls");
             screen.printQueue(kassa, queue);
