@@ -576,7 +576,7 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 			}
 			else
 				if (kassa[i].getUnique() != 0)
-					kassa[i].setUnique(kassa[i].getUnique - min);
+					kassa[i].setUnique(kassa[i].getUnique() - min);
 		}
 		timeCount += min;
 		if (kassa[0].getType() <= 0 && 
