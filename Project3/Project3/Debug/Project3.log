@@ -1,8 +1,1 @@
-﻿  main.cpp
-C:\Project\oop_project\Project3\Project3\control.h(106,16): warning C4101: q: неиспользованная локальная переменная
-C:\Project\oop_project\Project3\Project3\main.cpp(46,51): error C2660: Control::getTimers: функция не принимает 0 аргументов
-C:\Project\oop_project\Project3\Project3\control.h(65,14): message : см. объявление "Control::getTimers"
-C:\Project\oop_project\Project3\Project3\main.cpp(46,56): error C2660: Control::setTimers: функция не принимает 1 аргументов
-C:\Project\oop_project\Project3\Project3\control.h(66,15): message : см. объявление "Control::setTimers"
-  units.cpp
-  Создание кода...
+﻿  Project3.vcxproj -> C:\Project\oop_project\Project3\Debug\Project3.exe
