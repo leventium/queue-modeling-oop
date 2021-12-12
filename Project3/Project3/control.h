@@ -579,11 +579,11 @@ void Control::makeStat(UnitsCollection<QueueUnit> &queue,
 					kassa[i].setUnique(kassa[i].getUnique() - min);
 		}
 		timeCount += min;
-		if (kassa[0].setNumber() <= 0 && 
-			kassa[1].setNumber() <= 0 && 
-			kassa[2].setNumber() <= 0 && 
-			kassa[3].setNumber() <= 0 && 
-			kassa[4].setNumber() <= 0) 
+		if (kassa[0].getNumber() <= 0 && 
+			kassa[1].getNumber() <= 0 && 
+			kassa[2].getNumber() <= 0 && 
+			kassa[3].getNumber() <= 0 && 
+			kassa[4].getNumber() <= 0) 
 			flag = 0;
 	}
 }
