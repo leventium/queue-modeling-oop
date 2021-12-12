@@ -20,6 +20,7 @@ class QueueUnit : public OfferUnit
 private:
     int time;
 public:
+    QueueUnit();
     virtual void setUnique(int time);
     virtual int getUnique() const;
     void print() const;

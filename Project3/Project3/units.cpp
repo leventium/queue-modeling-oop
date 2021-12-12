@@ -9,6 +9,12 @@ void OfferUnit::setUnique(int info) { this->stInfo = info; }
 int OfferUnit::getUnique() const { return this->stInfo; }
 
 
+QueueUnit::QueueUnit()
+{
+    this->setNumber(0);
+    this->setType(0);
+    this->setUnique(0);
+}
 int QueueUnit::getUnique() const { return this->time; }
 void QueueUnit::setUnique(int time) { this->time = time; }
 void QueueUnit::print() const
